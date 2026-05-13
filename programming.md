@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="https://github.com/forbeskcg/pinball-immersive/blob/main/main.css">
 
 
 # Programming for Pinball
