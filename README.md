@@ -1,9 +1,6 @@
-# Getting Started
+# Pinball Design Xperience
 
-Make sure you have [Python (>= 3.10)](https://www.python.org/downloads/) installed.
+Welcome to our Immersive!
 
-Then, in a terminal within the project folder, install dependencies:
-
-`pip install -r requirements.txt`
-
-Run MkDocs with `mkdocs serve` or `python -m mkdocs serve`.
+Check out our documentation:
+* [Programming](https://github.com/forbeskcg/pinball-immersive/blob/main/programming.md)
