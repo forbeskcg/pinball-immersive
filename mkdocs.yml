@@ -88,6 +88,9 @@ plugins:
       css_style:
         width: 100%
 
+extra_css:
+  - stylesheets/extra.css
+
 nav:
   - Home: index.md
-  
+  - Programming: programming.md

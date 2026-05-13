@@ -17,7 +17,7 @@ Welcome! Below are resources for Catlin Gabel's pinball design-build immersive. 
 
 ## Resources
 
-* Programming (Cytron RPi Maker board)
+* [Programming](programming.md) (Cytron RPi Maker board)
 
     * Setting up a project
     * Controlling LEDs
