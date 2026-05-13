@@ -1,23 +1,5 @@
-<!-- <link rel="stylesheet" href="main.css"> -->
+<link rel="stylesheet" href="main.css">
 
-<style>
-summary {
-    font-weight: bold;
-    background: #c49bbb;
-    padding: 0.5em;
-    font-size: 1.25em;
-}
-
-details[open] summary {
-    background: #e7f1ff;
-}
-
-details {
-    margin-bottom: 0.5em;
-    background: #fdfdfd;
-    border: 2px solid black;
-}
-</style>
 
 # Programming for Pinball
 
