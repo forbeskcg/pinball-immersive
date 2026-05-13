@@ -6,7 +6,7 @@
 <details>
 <summary>Getting Started</summary>
 
-* We will be using Python to program the control boards for our pinabll machines.
+* We will be using Python to program the control boards for our pinball machines.
 
 * When you attach a board to your laptop via a USB cable, it will show up as an external drive called CIRCUITPY
 
@@ -21,6 +21,7 @@
 
 <details>
 <summary>Digital Input: Polling</summary>
+
 Polling a Digital Input will tell if an input is on at the moment, but might miss or double-count events.
 
 * Import pre-installed libraries:
@@ -44,6 +45,7 @@ Polling a Digital Input will tell if an input is on at the moment, but might mis
 
 <details>
 <summary>Digital Input: Listening</summary>
+
 Listening to a Digital Input will tell you about every time a digital input goes on (and off) exactly once, even if it happened while you were busy doing something else.
 
 * Import pre-installed libraries:
