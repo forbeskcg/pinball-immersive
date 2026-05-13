@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://github.com/forbeskcg/pinball-immersive/blob/main/main.css">
+<link rel="stylesheet" href="main.css">
 
 
 # Programming for Pinball
@@ -145,5 +145,54 @@ import board, music
 </details>
 
 <details>
+<summary>Play Music from a WAV audio file</summary>
+
+* Note: You will probably need to edit/convert your WAV file before playing it.
+* We recommend using the excellent free program [Audacity](https://www.audacityteam.org) to edit/convert WAV files
+* Export your WAV file with these settings:
+    * Mono channel (not stereo)
+    * The encoding should be either Unsigned 8-bit PCM or Signed 16-bit PCM 
+    * You might need to use a lower sample rate (try 16000)
+* Import pre-installed libraries:
+    * `import board, audiocore, audiopwmio`
+* Load the music file:
+    * `music = audiocore.WaveFile("my_wav_file.wav")`
+* Configure audio (on our boards, the piezo buzzer is GP pin 22):
+    * `audio = audiopwmio.PWMAudioOut(board.GP22)`
+* Play the music file once:
+    * `audio.play(music)`
+* Play the music file on repeat:
+    * `audio.play(music, loop=True)`
+* See reference documentation for the [audiocore](https://docs.circuitpython.org/en/latest/shared-bindings/audiocore) and [audiopwmio](https://docs.circuitpython.org/en/latest/shared-bindings/audiopwmio) libraries
+
+</details>
+
+<details>
+<summary>Play Music from a MP3 audio file</summary>
+
+* Note: You will probably need to edit/convert your MP3 file before playing it.
+* We recommend using the excellent free program [Audacity](https://www.audacityteam.org) to edit/convert MP3 files
+* Export your MP3 file with these settings:
+    * Mono channel (not stereo)
+    * Constant Bit Rate Mode (not preset, variable, or average)
+    * Lower Sample Rate (try 11025, other values may work too)
+    * Lower Quality (try 32 kbps, other values may work too)
+* Import pre-installed libraries:
+    * `import board, audiomp3, audiopwmio`
+* Load the music file:
+    * `music = audiomp3.MP3Decoder("my_mp3_file.wav")`
+* Configure audio (on our boards, the piezo buzzer is GP pin 22):
+    * `audio = audiopwmio.PWMAudioOut(board.GP22)`
+* Play the music file once:
+    * `audio.play(music)`
+* Play the music file on repeat:
+    * `audio.play(music, loop=True)`
+* See reference documentation for the [audiomp3](https://docs.circuitpython.org/en/latest/shared-bindings/audiomp3) and [audiopwmio](https://docs.circuitpython.org/en/latest/shared-bindings/audiopwmio) libraries
+
+</details>
+
+
+<details>
 <summary></summary>
 </details>
+
