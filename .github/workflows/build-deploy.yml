@@ -40,4 +40,5 @@ jobs:
         source: "./site/*"
         target: ${{ secrets.TARGET_DIR }}
         rm: true
+        debug: true
         strip_components: 1
