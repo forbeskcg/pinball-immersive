@@ -52,6 +52,10 @@
             if event.key_number == 1 and event.released:
                 # key 1 (GP5 in this example) was released, do something```
     * See reference documentation for the [keypad](https://docs.circuitpython.org/en/latest/shared-bindings/keypad) library
+    * Some things to note:
+        * When `value_when_pressed=False`:
+            * Sensors will detect something moving into view using `event.pressed`
+            * Switches with the wire connected to NC (normally closed) will detect the button being pressed using `event.released` and the button being released using `event.pressed`
 
 
 ??? note "Digital Output"
