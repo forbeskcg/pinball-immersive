@@ -162,3 +162,18 @@
     * Play the music file on repeat:
         * `audio.play(music, loop=True)`
     * See reference documentation for the [audiomp3](https://docs.circuitpython.org/en/latest/shared-bindings/audiomp3) and [audiopwmio](https://docs.circuitpython.org/en/latest/shared-bindings/audiopwmio) libraries
+
+??? note "Using Mixers for music"
+
+    * You can use mixers along with MP3 or WAV files to play mix them or change the volume
+    * Initialize music and audio like how you would when playing them normally
+    * Initialize the mixer
+        * `mixer = audiomixer.Mixer(voice_count, sample_rate, channel_count, bits_per_sample, samples_signed)
+    * Play the mixer using the audio
+        * `audio.play(mixer)`
+    * Play the music using the mixer
+        * `mixer.voice[index].play(music)
+        * index: what voice you want to use for that mixer
+    * Change volume of music
+        * `mixer.voice[index].level = 0.5
+        * Takes decimal values between 0 and 1, 0 being muted and 1 being full volume.
