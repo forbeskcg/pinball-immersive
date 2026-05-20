@@ -12,8 +12,8 @@
     * GND = Ground
     * GP# = Input or Output
 * Parts of the servo ports
-    * + = Power
-    * - = Ground
+    * "+" = Power
+    * "-" = Ground
     * S = Signal (What you would plug in to GP ports on the grove ports)
 
 ## Resources
