@@ -95,3 +95,4 @@ nav:
   - Home: index.md
   - Programming: programming.md
   - Circuit Board: circuitBoard.md
+  - LED Matrix Panel: LEDmatrix.md
