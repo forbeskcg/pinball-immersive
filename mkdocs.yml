@@ -94,3 +94,4 @@ extra_css:
 nav:
   - Home: index.md
   - Programming: programming.md
+  - Circuit Board: circuitBoard.md
