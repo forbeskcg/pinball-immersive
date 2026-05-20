@@ -8,11 +8,11 @@
 * Vin Terminal
     * Where the cable for power will plug in
 * Parts of the grove ports
-    * 3V3 = Power
+    * 3V3 = Power (3.3 volts)
     * GND = Ground
-    * GP# = Input or Output
+    * GP# = General Purpose Input or Output
 * Parts of the servo ports
-    * "+" = Power
+    * "+" = Power (5 volts)
     * "-" = Ground
     * S = Signal (What you would plug in to GP ports on the grove ports)
 
