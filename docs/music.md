@@ -83,7 +83,9 @@
     * You can use mixers along with MP3 or WAV files to play mix them or change the volume
     * Initialize music and audio like how you would when playing them normally
     * Initialize the mixer
-        * `mixer = audiomixer.Mixer(voice_count, sample_rate, channel_count, bits_per_sample, samples_signed)`
+        * `mixer = audiomixer.Mixer(voice_count=1, channel_count=1)`
+        * Each voice represents a different audio you can play from that same speaker.
+        * channel_count: 1 = mono, 2 = stereo
     * Play the mixer using the audio
         * `audio.play(mixer)`
     * Play the music using the mixer
@@ -92,3 +94,5 @@
     * Change volume of music
         * `mixer.voice[index].level = 0.5`
         * Takes decimal values between 0 and 1, 0 being muted and 1 being full volume.
+    * Resources
+        * https://docs.circuitpython.org/en/latest/shared-bindings/audiomixer/index.html
