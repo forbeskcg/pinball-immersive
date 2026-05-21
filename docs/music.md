@@ -3,21 +3,21 @@
 
 ??? note "Using the Built-in Piezo Buzzer"
 
-  * Our boards have a built-in piezo buzzer, so you can get simple sounds and some music without any additional wiring needed.
-  * The built-in piezo buzzer is connected to pin GP22
-  * There is a Buzzer Mute Switch next to the buzzer on the right edge of the board, which you can use to turn off the buzzer if it gets annoying.
+    * Our boards have a built-in piezo buzzer, so you can get simple sounds and some music without any additional wiring needed.
+    * The built-in piezo buzzer is connected to pin GP22
+    * There is a Buzzer Mute Switch next to the buzzer on the right edge of the board, which you can use to turn off the buzzer if it gets annoying.
 
 ??? note "Connecting an External Amplifier and Speaker"
 
-  ![Audio Amplifier Image](img/audio_amplifier.jpg "Audio Amplifier Image")
+    ![Audio Amplifier Image](img/audio_amplifier.jpg "Audio Amplifier Image")
 
-  * The audio amplifier doesn't have pins connected to it, so you will need to solder breakaway pins to be able to connect it to the circuit board.
-  * Connect the 5V+ pin to a 5 Volt power source (such as one of the Servo + pins)
-  * Connect the 5V- pin to ground (either the Servo - pin or a Grove GND pin)
-  * Connect the &perp; pin (between the bottom L and R) to ground (either the Servo - pin or a Grove GND pin)
-  * Connect the bottom R pin to the GP pin that you will use for playing audio (can be either a Servo S pin or a Grove GP pin)
-  * Connect the Out R + pin to the red wire on the speaker
-  * Connected the Out R - pin to the black wire on the speaker
+    * The audio amplifier doesn't have pins connected to it, so you will need to solder breakaway pins to be able to connect it to the circuit board.
+    * Connect the 5V+ pin to a 5 Volt power source (such as one of the Servo + pins)
+    * Connect the 5V- pin to ground (either the Servo - pin or a Grove GND pin)
+    * Connect the &perp; pin (between the bottom L and R) to ground (either the Servo - pin or a Grove GND pin)
+    * Connect the bottom R pin to the GP pin that you will use for playing audio (can be either a Servo S pin or a Grove GP pin)
+    * Connect the Out R + pin to the red wire on the speaker
+    * Connected the Out R - pin to the black wire on the speaker
 
 
 ??? note "Programming for Simple Tones and Notes"
