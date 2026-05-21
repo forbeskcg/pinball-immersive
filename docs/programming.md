@@ -115,7 +115,7 @@
 
     * Download the [music.py](libraries/music.py) library (read library for more detailed documentation)
     * Import the libraries:
-    import board, music
+        * `import board, music`
     * On our boards, the piezo buzzer is GP pin 22
     * Play a single tone with a given frequency (in hertz), duration (in seconds), volume (0..100):
         * `music.playTone(board.GP22, 440, 0.25, 50)`
