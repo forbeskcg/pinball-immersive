@@ -5,7 +5,7 @@
 ![Photo of an actual circuit board](img/inPersonCircuitBoard.jpg "Actual Circuit Board")
 
 ## Notable parts
-* Vin Terminal
+* Vin Terminal (Green)
     * Where the cable for power will plug in
 * Parts of the grove ports
     * 3V3 = Power (3.3 volts)
