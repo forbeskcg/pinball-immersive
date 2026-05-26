@@ -17,14 +17,13 @@ Welcome! Below are resources for Catlin Gabel's pinball design-build immersive. 
 
 ## Resources
 
-* [Programming](programming.md) (Cytron RPi Maker board)
+* [Circuit Board](circuitBoard.md)
+* [Programming](programming.md)
+* [Digital Switches](switches.md)
+* [Sound and Music](music.md)
+* [NeoPixel colored LEDs](neopixel.md)
 
-    * Setting up a project
-    * Controlling LEDs
-    * Actuating a solenoid
-    * Actuating a servo
-    * Digital inputs and outputs
-    * Making sound
+
 
 * Digital fabrication
 
