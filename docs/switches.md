@@ -17,6 +17,28 @@
         * `if button1.value == False:   # good choice for Pulled Up input buttons`
     * See reference documentation for the [digitalio](https://docs.circuitpython.org/en/latest/shared-bindings/digitalio) library
 
+??? note "Programming for Digital Inputs with the Keypad Library"
+
+    The Keypad library to a Digital Input will tell you about each time a digital input goes on (and off) exactly once, even if it happened while you were busy doing something else.
+
+    * Import pre-installed libraries:
+        * `import board, keypad`
+    * Configure the inputs to listen to:
+        * `input = keypad.Keys([board.GP4, board.GP5], value_when_pressed=False)`
+        * First argument is a list of GP pins to listen to
+        * Second argument is a boolean, True if inputs read high when pressed, False if inputs read low (grounded) when pressed.  All inputs must be configured the same way.
+    * Listen for inputs:
+        ```
+        while input.events:
+            event = input.events.get()
+            if event.key_number == 0 and event.pressed:
+                # key 0 (GP4 in this example) was pressed, do something
+            if event.key_number == 1 and event.released:
+                # key 1 (GP5 in this example) was released, do something```
+    * See reference documentation for the [keypad](https://docs.circuitpython.org/en/latest/shared-bindings/keypad) library
+ 
+
+
 ??? note "Using the Built-in Buttons"
 
   * There are two built-in input buttons on our Cytron boards.
