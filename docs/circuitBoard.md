@@ -17,9 +17,9 @@ We are using Raspberry Pi Pico microcontroller boards, specifically [Cytron Make
     * GND = Ground
     * GP# = General Purpose Input or Output
 * 4 Servo ports
-    * + = Power (5 volts)
-    * - = Ground
-    * S = Signal (a GPIO pin)
+    * "+" = Power (5 volts)
+    * "-" = Ground
+    * "S" = Signal (a GPIO pin)
 * 2 Motor ports
 * A Piezo Buzzer (sound and music) with mute switch
 * 2 Buttons

@@ -1,18 +1,46 @@
 
-# Switches
+# Switches and Digital Inputs
 
-## Wiring
-There are 3 places you can connect wires on the switch, labeled NC (normally closed), NO (normally open), and C (ground). C will always connect to ground, while NC or NO will connect to the GP pins
+??? note "Programming for Digital Inputs with Polling"
 
-## Soldering
-* C must always be connected to ground, while you can choose between using NC or NO to save space as they both tell you when the switch is pressed. Which one you choose to solder will change how your code works.
+    Polling a Digital Input will tell if an input is on at the moment, but might miss or double-count events.
 
-## Programming
-* When the switch is wired so it connects to NC
-  * if value_when_pressed=False then the switch being pressed will be seen in the code as event.released and the switch being released would be seen as event.pressed.
-  * if value_when_pressed=True then the switch being pressed will be seen in the code as event.pressed and the switch being released would be seen as event.released.
-* When the switch is wired so it connects to NO
-  * if value_when_pressed=False then the switch being pressed will be seen in the code as event.pressed and the switch being released would be seen as event.released.
-  * if value_when_pressed=True then the switch being pressed will be seen in the code as event.released and the switch being released would be seen as event.pressed.
+    * Import pre-installed libraries:
+        * `import board, digitalio`
+    * `Attach to one of the General Purpose Input/Output (GP) pins (GP0, GP1, ...):
+        * `button1 = digitalio.DigitalInOut(board.GP1)`
+    * Set input mode:
+        *  `button1.direction = digitalio.Direction.INPUT`
+    * Set the input to Pull Up mode:
+        * `button1.pull = digitalio.Pull.UP`
+    * You can check the current state of the input:
+        * `if button1.value == False:   # good choice for Pulled Up input buttons`
+    * See reference documentation for the [digitalio](https://docs.circuitpython.org/en/latest/shared-bindings/digitalio) library
 
-## Resources
+??? note "Using the Built-in Buttons"
+
+  * There are two built-in input buttons on our Cytron boards.
+  * They are connected to the GP20 and GP21 pins.
+  * They are automatically in Pull Up mode (so you don't need to pull them up yourself)
+  * The button will noramlly have a value of True, and will change to False when pressed 
+
+??? note "Using a Mechanical Microswitch"
+
+  ![Microswitch Image](img/mechanical_microswitch.jpg "Microswitch Image")
+
+  * Connect the C (Common) pin to GND (Ground)
+  * Connect the NO (Normally Open) pin to a GP pin
+  * Configure that GP pin as a Input in Pull Up mode
+  * The switch will normally have a value of True, and will change to False when pressed
+
+??? note "Using an Optical Proximity Switch"
+
+  ![Optical Switch Image](img/optical_switch.jpg "Optical Switch Image")
+
+  * This will sense if something (like the pinball) is close to the sensor
+  * Connect the Vcc pin to a 3v3 (red) wire from a Grove connector
+  * Connect the GND pin to a GND (black) wire from a Grove connector
+  * Connect the DO (Digital Out) pin to a GP pin (white or yellow) from a Grove connector
+  * Do not connect the AO pin to anything
+  * The switch will normally have a value of True, and will change to False when something (like a pinball) is near it
+

@@ -1,14 +1,12 @@
 # Programming for Pinball
 
-??? note "Getting Started"
-
-    * We will be using Python to program the control boards for our pinball machines.
-    * When you attach a board to your laptop via a USB cable, it will show up as an external drive called CIRCUITPY
-    * The drive should contain a file called **`code.py`** that will be executed automatically when the board is powered on.
-    * Your program should contain some initialization instructions, and then a `while True:` loop that will run forever while the board is powered on.
-    * Editors
-        * We recommend using the [Mu Editor](https://codewith.mu) to program the boards in Python.
-        * You can also try the [CircuitPython Code Editor](https://code.circuitpython.org) which is a web-based editor (nothing to install on your computer).
+* We will be using Python to program the control boards for our pinball machines.
+* When you attach a board to your laptop via a USB cable, it will show up as an external drive called CIRCUITPY
+* The drive should contain a file called **`code.py`** that will be executed automatically when the board is powered on.
+* Your program should contain some initialization instructions, and then a `while True:` loop that will run forever while the board is powered on.
+* Editors
+    * We recommend using the [Mu Editor](https://codewith.mu) to program the boards in Python.
+    * You can also try the [CircuitPython Code Editor](https://code.circuitpython.org) which is a web-based editor (nothing to install on your computer).
 
 
 ??? note "Digital Input: Polling"
