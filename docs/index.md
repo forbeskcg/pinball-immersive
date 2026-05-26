@@ -6,9 +6,9 @@ Welcome! Below are resources for Catlin Gabel's pinball design-build immersive. 
 ## Schedule
 
 * Day 1: Introduction, skill building and small group kickoff
-* Day 2: MiniMachine Builds
+* Day 2: Mini Machine Builds
 * Day 3: Pinball Expedition
-* Day 4: Machine Kickoff
+* Day 4: Big Machine Kickoff
 * Day 5: Prototyping and Box Build
 * Day 6: Mechanism Design and Assembly
 * Day 7: Integration and Iteration
