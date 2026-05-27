@@ -7,11 +7,11 @@ NeoPixels are LED lights that can display programmable colors, using any combina
 ??? note "Wiring NeoPixels"
 
     * You will need to solder wires to the end of your NeoPixel strip.
-    * It is easiest to use a Servo connector for your NeoPixels.
+    * It is easiest to use the Servo pins for your NeoPixels.
     * Connect the 5V pad to one of the Servo + pins
     * Connect the GND pad to one of the Servo - pins
     * Connect the Din (digital-in) pad to one of the Servo S pins
-    * NeoPixel strips can cut along the white lines that divide the solder pads in half
+    * NeoPixel strips can be cut along the white lines that divide the solder pads in half
 
 ??? note "Programming NeoPixels"
 

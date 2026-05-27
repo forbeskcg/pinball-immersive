@@ -93,7 +93,7 @@
         * `audio.play(mixer)`
     * Play the music using the mixer
         * `mixer.play(music, voice=0)`
-        * For the voice number, indicate wich voice you want to use for that music
+        * For the voice number, indicate which voice you want to use for that music
     * Change volume of music
         * `mixer.voice[index].level = 0.5`
         * index is the voice number you are controlling

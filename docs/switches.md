@@ -56,7 +56,7 @@
     * There are two built-in input buttons on our Cytron boards.
     * They are connected to the GP20 and GP21 pins.
     * They are automatically in Pull Up mode (so you don't need to pull them up yourself)
-    * The button will noramlly have a value of True, and will change to False when pressed 
+    * The button will normally have a value of True, and will change to False when pressed 
 
 ??? note "Using a Mechanical Microswitch"
 
