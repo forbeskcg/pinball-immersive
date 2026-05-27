@@ -38,6 +38,18 @@
     * See reference documentation for the [keypad](https://docs.circuitpython.org/en/latest/shared-bindings/keypad) library
  
 
+??? note "Programming for Digital Inputs with the FastInput Library"
+
+    The FastInput library, written by Kevin Forbes and Andrew Merrill, will watch a fast momentary digital input and let you know if it was pressed since you last checked it.
+
+    * Download the [fastinput.py](libraries/fastinput.py) library and save it into the lib folder on your circuitpy board. 
+    * Import the library:
+        * `from fastinput import FastInput`
+    * Initialize a fast input:
+        * `input1 = FastInput(board.GP5)`
+    * Check to see if the input was pressed since you last checked:
+        * `if input1.wasPressed():`   
+
 
 ??? note "Using the Built-in Buttons"
 
