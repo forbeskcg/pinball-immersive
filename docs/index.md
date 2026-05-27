@@ -22,4 +22,5 @@ Welcome! Below are resources for Catlin Gabel's pinball design-build immersive. 
 * [Digital Switches](switches.md)
 * [Sound and Music](music.md)
 * [NeoPixel colored LEDs](neopixel.md)
+* [LED Matrix Panel](LEDmatrix.md)
 * [Servo Motors](servos.md)

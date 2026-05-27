@@ -93,6 +93,10 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Programming: programming.md
   - Circuit Board: circuitBoard.md
+  - Programming: programming.md
+  - Digital Switches: switches.md
+  - Sound and Music: music.md
+  - NeoPixels: neopixel.md
   - LED Matrix Panel: LEDmatrix.md
+  - Servo Motors: servos.md
