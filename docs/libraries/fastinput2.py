@@ -4,7 +4,7 @@ Library for reading a fast momentary digital input using PIO
 Authors: Kevin Forbes and Andrew Merrill
 Version: 1.0
 
-Example usage:
+Example usage: 
 
 from fastinput import FastInput
 input1 = FastInput(board.GP5)
