@@ -27,3 +27,16 @@
         * `led1.value = False`
     * See reference documentation for the [digitalio](https://docs.circuitpython.org/en/latest/shared-bindings/digitalio) library
 
+??? note "Example Program"
+
+    ```
+    import board, digitalio, time
+    led1 = digitalio.DigitalInOut(board.GP1)
+    led1.direction = digitalio.Direction.OUTPUT
+
+    led1.value = True
+
+    while True:
+        time.sleep(0.1)
+    ```
+        
