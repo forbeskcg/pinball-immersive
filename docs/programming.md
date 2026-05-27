@@ -18,11 +18,12 @@
 
     * Import pre-installed libraries:
         * `import board, digitalio`
-    * Attach to one of the General Purpose Input/Output (GP) pins (GP0, GP1, ...):
-        * `led1 = digitalio.DigitalInOut(board.GP1)`
-    * Set the pin to output mode:
-        * `led1.direction = digitalio.Direction.OUTPUT`
-    * You can set the value of the output:
+    * In the Initialize section of your program:
+        * Attach to one of the General Purpose Input/Output (GP) pins (GP0, GP1, ...):
+            * `led1 = digitalio.DigitalInOut(board.GP1)`
+        * Set the pin to output mode:
+            * `led1.direction = digitalio.Direction.OUTPUT`
+    * You can set the value of the output (either in initialization or in your forever loop):
         * `led1.value = True`
         * `led1.value = False`
     * See reference documentation for the [digitalio](https://docs.circuitpython.org/en/latest/shared-bindings/digitalio) library
