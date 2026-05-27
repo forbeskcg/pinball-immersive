@@ -42,7 +42,9 @@
 
     The FastInput library, written by Kevin Forbes and Andrew Merrill, will watch a fast momentary digital input and let you know if it was pressed since you last checked it.
 
-    * Download the [fastinput.py](libraries/fastinput.py) library and save it into the lib folder on your circuitpy board. 
+    * Download libraries:
+        * Download the [fastinput.py](libraries/fastinput.py) library and save it into the lib folder on your circuitpy board. 
+        * Download the [adafruit_pioasm.mpy](libraries/adafruit_pioasm.mpy) library and save it into the lib folder on your circuitpy board. 
     * Import the library:
         * `from fastinput import FastInput`
     * Initialize a fast input:
