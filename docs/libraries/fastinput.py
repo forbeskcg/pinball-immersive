@@ -2,16 +2,19 @@
 Library for reading a fast momentary digital input using PIO
 
 Authors: Kevin Forbes and Andrew Merrill
-Version: 1.0
+Version: 1.1
 
-Example usage: 
+Example usage:
 
+import time
 from fastinput import FastInput
 input1 = FastInput(board.GP5)
 
 while True:
     if input1.wasPressed():
         # do something
+        time.sleep(0.1)
+        input1.reset()
 '''
 
 import adafruit_pioasm
@@ -46,19 +49,21 @@ class FastInput:
             wait_for_txstall=False)
 
         self.output = array.array("b", [0])
-        self.reset()
+        self._reset_state_machine()
 
     def reset(self):
-        #if self.state_machine.txstall:
-        #    self.state_machine.clear_txstall()
-        self.state_machine.write(self.output)
+        if self.state_machine.in_waiting:
+            self.state_machine.clear_rxfifo()
+            self._reset_state_machine()
 
+    def _reset_state_machine(self):
+        self.state_machine.write(self.output)
 
     # returns true if the input pin was set (low) since the last time that wasPressed() was called
     def wasPressed(self):
         if self.state_machine.in_waiting:
             self.state_machine.clear_rxfifo()
-            self.reset()
+            self._reset_state_machine()
             return True
         else:
             return False

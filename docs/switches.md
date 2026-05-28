@@ -51,6 +51,10 @@
         * `input1 = FastInput(board.GP5)`
     * Check to see if the input was pressed since you last checked:
         * `if input1.wasPressed():`   
+    * If you find that this is reporting multiple presses per event, then we recommend waiting for a bit and resetting the input like this:
+        * `time.sleep(0.1)`
+        * `input1.reset()`
+    
 
 
 ??? note "Using the Built-in Buttons"
