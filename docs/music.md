@@ -12,12 +12,18 @@
     ![Audio Amplifier Image](img/audio_amplifier.jpg "Audio Amplifier Image")
 
     * The audio amplifier doesn't have pins connected to it, so you will need to solder breakaway pins to be able to connect it to the circuit board.
-    * Connect the 5V+ pin to a 5 Volt power source (such as one of the Servo + pins)
+    * Connect the 5V+ pin:
+        * Connect the 5V+ pin to a switch on your breadboard
+        * Connect the other wise of the switch to a 5 Volt power source (such as one of the Servo + pins)
     * Connect the 5V- pin to ground (either the Servo - pin or a Grove GND pin)
     * Connect the &perp; pin (between the bottom L and R) to ground (either the Servo - pin or a Grove GND pin)
     * Connect the bottom R pin to the GP pin that you will use for playing audio (can be either a Servo S pin or a Grove GP pin)
     * Connect the Out R + pin to the red wire on the speaker
     * Connected the Out R - pin to the black wire on the speaker
+    * If you are using stereo speakers:
+        * Connect the Out L + pin to the red wire on the other speaker
+        * Connect the Out L - pin to the black wire on the other speaker
+        * Connect the bottom L pin to another GP pin (can be either a Servo S pin or a Grove GP pin)
 
 
 ??? note "Programming for Simple Tones and Notes"
