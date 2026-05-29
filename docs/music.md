@@ -55,8 +55,10 @@
         * `import board, audiocore, audiopwmio`
     * Load the music file:
         * `music = audiocore.WaveFile("my_wav_file.wav")`
-    * Configure audio (on our boards, the piezo buzzer is GP pin 22):
+    * Configure audio for mono (one speaker) (remeber that on our boards, the piezo buzzer is GP pin 22):
         * `audio = audiopwmio.PWMAudioOut(board.GP22)`
+    * Configure audio for stereo (two speakers):
+        * `audio = audiopwmio.PWMAudioOut(left_channel=board.GP16, right_channel=board.GP17)`
     * Play the music file once:
         * `audio.play(music)`
     * Play the music file on repeat:
@@ -76,8 +78,10 @@
         * `import board, audiomp3, audiopwmio`
     * Load the music file:
         * `music = audiomp3.MP3Decoder("my_mp3_file.wav")`
-    * Configure audio (on our boards, the piezo buzzer is GP pin 22):
+    * Configure audio for mono (one speaker) (remember that on our boards, the piezo buzzer is GP pin 22):
         * `audio = audiopwmio.PWMAudioOut(board.GP22)`
+    * Configure audio for stereo (two speakers):
+        * `audio = audiopwmio.PWMAudioOut(left_channel=board.GP16, right_channel=board.GP17)`
     * Play the music file once:
         * `audio.play(music)`
     * Play the music file on repeat:
