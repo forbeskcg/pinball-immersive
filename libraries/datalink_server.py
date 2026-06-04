@@ -182,7 +182,7 @@ def run(server_queue: queue.SimpleQueue) -> None:
                 value = int.from_bytes(payload[-4:], byteorder='little', signed=True)
                 print(f"client {sender} says send '{key}' is {value} to client {destination}")
                 if destination == 0: 
-                    server_queue.add((key, value))
+                    server_queue.put((key, value))
                 else:
                     sendOutgoingPacket(MESSAGE, destination, key, value)
 
@@ -191,7 +191,7 @@ def run(server_queue: queue.SimpleQueue) -> None:
                 key = payload[0:key_length].decode('utf-8')
                 value = int.from_bytes(payload[-4:], byteorder='little', signed=True)
                 print(f"client {sender} says broadcast '{key}' is {value} to everyone")
-                server_queue.add((key, value))
+                server_queue.put((key, value))
                 for destination in source_ids:
                     sendOutgoingPacket(MESSAGE, destination, key, value)
 
