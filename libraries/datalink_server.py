@@ -1,13 +1,14 @@
+
 # Server program to handle communicate between multiple microcontrollers
 #
 # Author: Andrew Merrill
 # Version: 0.9,  May 2026
 
-"""
+'''
 Usage:
-    Run this program on a host computer (running Linux or MacOS)
+    Run this program on a host computer (running Linux or MacOS) 
     Attach each client board to the host via a USB cable
-
+    
     We maintain a dictionary of keys and values stored this server
     Clients can store values for different keys
     Clients can ask for the current value of a key
@@ -40,7 +41,7 @@ packet types sent by server:
 100 : RESPONSE sent by server in response to REQUEST or WATCH (payload is key and value)
 101 : MESSAGE forwarded by server from a SEND or BROADCAST packet (payload is key and value)
 
-"""
+'''
 
 #########################################################################
 
@@ -50,24 +51,23 @@ import os.path
 import select
 import platform
 import pathlib
-from typing import Callable
 
 ###########################################################################################
 
 # Find all data serial ports
 
-if platform.system() == "Darwin":  # MacOS
-    dev_dir = pathlib.Path("/dev")
-    serial_devices = list(dev_dir.glob("cu.usbmodem*3"))
+if platform.system() == 'Darwin':  # MacOS
+    dev_dir = pathlib.Path('/dev')
+    serial_devices = list(dev_dir.glob('cu.usbmodem*3'))
     serial_devices = [str(p) for p in serial_devices]
     print(serial_devices)
-elif platform.system() == "Linux":  # Linux
-    dev_dir = pathlib.Path("/dev")
-    serial_devices = list(dev_dir.glob("ttyACM*[13579]"))
+elif platform.system() == 'Linux':  # Linux
+    dev_dir = pathlib.Path('/dev')
+    serial_devices = list(dev_dir.glob('ttyACM*[13579]'))
     serial_devices = [str(p) for p in serial_devices]
     print(serial_devices)
 
-# ports = ['/dev/cu.usbmodem11403', '/dev/cu.usbmodem11103']
+#ports = ['/dev/cu.usbmodem11403', '/dev/cu.usbmodem11103']
 
 ###########################################################################################
 
@@ -93,13 +93,11 @@ for device in serial_devices:
         hello_packet = bytes([0, HELLO, 0])
         serial_port.write(hello_packet)
 
-source_ids = {}
+source_ids = {}  
 
 stored_values = {}  # key is a KEY string, value is a VALUE integer
 
-watchers = (
-    {}
-)  # key is a KEY string, value is a set of id numbers of clients watching this key
+watchers = {}  # key is a KEY string, value is a set of id numbers of clients watching this key
 
 #################################################################################################
 
@@ -110,31 +108,23 @@ watchers = (
 #   key: a string
 #   value: an integer
 
-
 def sendOutgoingPacket(packet_kind, destination, key, value):
-    print(
-        f"sending packet kind {packet_kind} to {destination} key {key} has value {value}"
-    )
+    print(f"sending packet kind {packet_kind} to {destination} key {key} has value {value}")
     if destination in source_ids:
-        payload = key.encode("utf-8") + value.to_bytes(
-            4, byteorder="little", signed=True
-        )
+        payload = key.encode("utf-8") + value.to_bytes(4, byteorder='little', signed=True)
         packet = bytes([0, packet_kind, len(payload)]) + payload
         serial_data = source_ids[destination]
         serial_data.write(packet)
     else:
         print(f"destination {destination} is unknown")
 
-
 #################################################################################################
 
-
-def run(callback: Callable[[str, int, int, bytes], None]) -> None:
+def run() -> None:
     while True:
+
         # wait for incoming data
-        (readable, writeable, exceptional) = select.select(
-            serial_data_list, [], [], None
-        )
+        (readable, writeable, exceptional) = select.select(serial_data_list, [], [], None)
         for indata in readable:
             header = indata.read(3)
             sender = header[0]
@@ -145,71 +135,63 @@ def run(callback: Callable[[str, int, int, bytes], None]) -> None:
             else:
                 payload = None
 
-            print(
-                f"received from {sender} packet kind {packet_kind} length {payload_length} payload {payload}"
-            )
+            print(f"received from {sender} packet kind {packet_kind} length {payload_length} payload {payload}")
 
             source_ids[sender] = indata
 
-            callback(sender, packet_kind, payload_length, payload)
+            if packet_kind == HELLO:
+                print(f"client {sender} says hello")
+            
+            elif packet_kind == STORE or packet_kind == ADD or packet_kind == MULTIPLY:
+                key_length = payload_length - 4
+                key = payload[0:key_length].decode('utf-8')
+                value = int.from_bytes(payload[-4:], byteorder='little', signed=True)
+                if packet_kind == STORE or key not in stored_values:
+                    stored_values[key] = value
+                    print(f"client {sender} says to set '{key}' to {value}")
+                elif packet_kind == ADD:
+                    stored_values[key] += value
+                    print(f"client {sender} says to add {value} to '{key}', new value is {stored_values[key]}")
+                elif packet_kind == MULTIPLY:
+                    stored_values[key] *= value
+                    print(f"client {sender} says to multiply '{key}' by {value}, new value is {stored_values[key]}")
+                if key in watchers:
+                    for watcher_id in watchers[key]:
+                        sendOutgoingPacket(RESPONSE, watcher_id, key, stored_values[key])
 
+            elif packet_kind == REQUEST:
+                key = payload.decode('utf-8')
+                print(f"client {sender} is requesting value of '{key}'")
+                if key in stored_values:
+                    sendOutgoingPacket(RESPONSE, sender, key, stored_values[key])
 
-def default_callback(sender: str, packet_kind: int, payload_length: int, payload: bytes) -> None:
-    if packet_kind == HELLO:
-        print(f"client {sender} says hello")
+            elif packet_kind == WATCH:
+                key = payload.decode('utf-8')
+                print(f"client {sender} is watching '{key}'")
+                if key not in watchers:
+                    watchers[key] = set()
+                watchers[key].add(sender)
+                if key in stored_values:
+                    sendOutgoingPacket(RESPONSE, sender, key, stored_values[key])
 
-    elif packet_kind == STORE or packet_kind == ADD or packet_kind == MULTIPLY:
-        key_length = payload_length - 4
-        key = payload[0:key_length].decode("utf-8")
-        value = int.from_bytes(payload[-4:], byteorder="little", signed=True)
-        if packet_kind == STORE or key not in stored_values:
-            stored_values[key] = value
-            print(f"client {sender} says to set '{key}' to {value}")
-        elif packet_kind == ADD:
-            stored_values[key] += value
-            print(
-                f"client {sender} says to add {value} to '{key}', new value is {stored_values[key]}"
-            )
-        elif packet_kind == MULTIPLY:
-            stored_values[key] *= value
-            print(
-                f"client {sender} says to multiply '{key}' by {value}, new value is {stored_values[key]}"
-            )
-        if key in watchers:
-            for watcher_id in watchers[key]:
-                sendOutgoingPacket(RESPONSE, watcher_id, key, stored_values[key])
+            elif packet_kind == SEND:
+                destination = payload[0]
+                key_length = payload_length - 5
+                key = payload[1:key_length+1].decode('utf-8')
+                value = int.from_bytes(payload[-4:], byteorder='little', signed=True)
+                print(f"client {sender} says send '{key}' is {value} to client {destination}")
+                sendOutgoingPacket(MESSAGE, destination, key, value)
 
-    elif packet_kind == REQUEST:
-        key = payload.decode("utf-8")
-        print(f"client {sender} is requesting value of '{key}'")
-        if key in stored_values:
-            sendOutgoingPacket(RESPONSE, sender, key, stored_values[key])
+            elif packet_kind == BROADCAST:
+                key_length = payload_length - 4
+                key = payload[0:key_length].decode('utf-8')
+                value = int.from_bytes(payload[-4:], byteorder='little', signed=True)
+                print(f"client {sender} says broadcast '{key}' is {value} to everyone")
+                for destination in source_ids:
+                    sendOutgoingPacket(MESSAGE, destination, key, value)
 
-    elif packet_kind == WATCH:
-        key = payload.decode("utf-8")
-        print(f"client {sender} is watching '{key}'")
-        if key not in watchers:
-            watchers[key] = set()
-        watchers[key].add(sender)
-        if key in stored_values:
-            sendOutgoingPacket(RESPONSE, sender, key, stored_values[key])
-
-    elif packet_kind == SEND:
-        destination = payload[0]
-        key_length = payload_length - 5
-        key = payload[1 : key_length + 1].decode("utf-8")
-        value = int.from_bytes(payload[-4:], byteorder="little", signed=True)
-        print(f"client {sender} says send '{key}' is {value} to client {destination}")
-        sendOutgoingPacket(MESSAGE, destination, key, value)
-
-    elif packet_kind == BROADCAST:
-        key_length = payload_length - 4
-        key = payload[0:key_length].decode("utf-8")
-        value = int.from_bytes(payload[-4:], byteorder="little", signed=True)
-        print(f"client {sender} says broadcast '{key}' is {value} to everyone")
-        for destination in source_ids:
-            sendOutgoingPacket(MESSAGE, destination, key, value)
+        #time.sleep(0.05)
 
 
 if __name__ == "__main__":
-    run(default_callback)
+    run()

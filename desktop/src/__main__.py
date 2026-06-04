@@ -11,9 +11,7 @@ if __name__ == "__main__":
     t = threading.Thread(target=hello_world)
     t.daemon = True
     t.start()
-    link = threading.Thread(
-        target=lambda: datalink_server.run(datalink_server.default_callback)
-    )
+    link = threading.Thread(target=datalink_server.run)
     link.daemon = True
     link.start()
     while True:
