@@ -1,5 +1,6 @@
 import threading
 import time
+import datalink_server
 
 
 def hello_world() -> None:
@@ -10,5 +11,8 @@ if __name__ == "__main__":
     t = threading.Thread(target=hello_world)
     t.daemon = True
     t.start()
+    link = threading.Thread(target=datalink_server.run)
+    link.daemon = True
+    link.start()
     while True:
         time.sleep(5)
