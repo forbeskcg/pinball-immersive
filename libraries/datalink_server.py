@@ -191,3 +191,7 @@ def run() -> None:
                     sendOutgoingPacket(MESSAGE, destination, key, value)
 
         #time.sleep(0.05)
+
+
+if __name__ == "__main__":
+    run()
