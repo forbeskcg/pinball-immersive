@@ -47,6 +47,7 @@ packet types sent by server:
 
 import serial  # pip3 install pyserial
 import time
+import queue
 import os.path
 import select
 import platform
@@ -120,7 +121,7 @@ def sendOutgoingPacket(packet_kind, destination, key, value):
 
 #################################################################################################
 
-def run() -> None:
+def run(server_queue: queue.SimpleQueue) -> None:
     while True:
 
         # wait for incoming data
@@ -180,13 +181,17 @@ def run() -> None:
                 key = payload[1:key_length+1].decode('utf-8')
                 value = int.from_bytes(payload[-4:], byteorder='little', signed=True)
                 print(f"client {sender} says send '{key}' is {value} to client {destination}")
-                sendOutgoingPacket(MESSAGE, destination, key, value)
+                if destination == 0: 
+                    server_queue.add((key, value))
+                else:
+                    sendOutgoingPacket(MESSAGE, destination, key, value)
 
             elif packet_kind == BROADCAST:
                 key_length = payload_length - 4
                 key = payload[0:key_length].decode('utf-8')
                 value = int.from_bytes(payload[-4:], byteorder='little', signed=True)
                 print(f"client {sender} says broadcast '{key}' is {value} to everyone")
+                server_queue.add((key, value))
                 for destination in source_ids:
                     sendOutgoingPacket(MESSAGE, destination, key, value)
 
