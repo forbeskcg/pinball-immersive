@@ -17,6 +17,8 @@ def play_sound(sound: int) -> None:
 if __name__ == "__main__":
     queue = queue.SimpleQueue()
 
+    play_sound(1)
+
     link = threading.Thread(target=lambda: datalink_server.run(queue))
     link.daemon = True
     link.start()
@@ -26,6 +28,8 @@ if __name__ == "__main__":
 
         if task is None:
             continue
+
+        print(f"task: {task}")
 
         if task[0] == "music":
             play_sound(task[1])
