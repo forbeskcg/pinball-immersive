@@ -23,7 +23,7 @@ def updateWorld(world):
 
     print(f"task: {task}")
 
-    if task[0] == "music":
+    if task[0] == "sound":
         # DO NOT remove or change existing sounds
         if task[1] == 1:
             graphics.playMusic(world.sounds["winner_bell"])
