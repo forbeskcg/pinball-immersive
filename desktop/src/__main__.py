@@ -1,7 +1,7 @@
 import threading
 import lib.datalink_server as datalink_server
 import queue
-import graphics
+import lib.graphics as graphics
 
 
 def hello_world() -> None:
