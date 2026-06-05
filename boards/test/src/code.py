@@ -7,4 +7,7 @@ input1 = FastInput(board.GP21)
 
 while True:
     if input1.wasPressed():
-        music.playTone(board.GP22, 440, 0.25, 50)
+        datalink.send(0, "sound", 1)
+
+    if datalink.hasPacket():
+        packet = datalink.getPacket()
