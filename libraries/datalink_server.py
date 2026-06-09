@@ -57,29 +57,15 @@ import pathlib
 ###########################################################################################
 
 ports = serial.tools.list_ports.comports()
-for port in ports:
-    print(f"Device Path: {port.device}")
-    print(f"Description: {port.description}")
-    print(f"Hardware ID: {port.hwid}")
-    print(f"Interface: {port.interface}\n")
+# for port in ports:
+#     print(f"Device Path: {port.device}")
+#     print(f"Description: {port.description}")
+#     print(f"Hardware ID: {port.hwid}")
+#     print(f"Interface: {port.interface}\n")
 
 serial_devices = [port.device for port in ports if port.description == "Maker Pi RP2040 - CircuitPython CDC2 control"]
+print(serial_devices)
 
-
-# Find all data serial ports
-
-# if platform.system() == 'Darwin':  # MacOS
-#     dev_dir = pathlib.Path('/dev')
-#     serial_devices = list(dev_dir.glob('cu.usbmodem*3'))
-#     serial_devices = [str(p) for p in serial_devices]
-#     print(serial_devices)
-# elif platform.system() == 'Linux':  # Linux
-#     dev_dir = pathlib.Path('/dev')
-#     serial_devices = list(dev_dir.glob('ttyACM*[13579]'))
-#     serial_devices = [str(p) for p in serial_devices]
-#     print(serial_devices)
-
-#ports = ['/dev/cu.usbmodem11403', '/dev/cu.usbmodem11103']
 
 ###########################################################################################
 
