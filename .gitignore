@@ -3,3 +3,4 @@
 website/site/
 *.DS_Store
 __pycache__
+desktop/log
