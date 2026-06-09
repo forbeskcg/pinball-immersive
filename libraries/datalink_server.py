@@ -107,7 +107,10 @@ for device in serial_devices:
 
 source_ids = {}  
 
-stored_values = {}  # key is a KEY string, value is a VALUE integer
+# key is a KEY string, value is a VALUE integer
+stored_values = {
+    "state": 0,
+}
 
 watchers = {}  # key is a KEY string, value is a set of id numbers of clients watching this key
 
