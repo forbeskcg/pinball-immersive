@@ -46,6 +46,7 @@ packet types sent by server:
 #########################################################################
 
 import serial  # pip3 install pyserial
+import serial.tools.list_ports
 import time
 import queue
 import os.path
@@ -55,18 +56,28 @@ import pathlib
 
 ###########################################################################################
 
+ports = serial.tools.list_ports.comports()
+for port in ports:
+    print(f"Device Path: {port.device}")
+    print(f"Description: {port.description}")
+    print(f"Hardware ID: {port.hwid}")
+    print(f"Interface: {port.interface}\n")
+
+serial_devices = [port.device for port in ports if port.description == "Maker Pi RP2040 - CircuitPython CDC2 control"]
+
+
 # Find all data serial ports
 
-if platform.system() == 'Darwin':  # MacOS
-    dev_dir = pathlib.Path('/dev')
-    serial_devices = list(dev_dir.glob('cu.usbmodem*3'))
-    serial_devices = [str(p) for p in serial_devices]
-    print(serial_devices)
-elif platform.system() == 'Linux':  # Linux
-    dev_dir = pathlib.Path('/dev')
-    serial_devices = list(dev_dir.glob('ttyACM*[13579]'))
-    serial_devices = [str(p) for p in serial_devices]
-    print(serial_devices)
+# if platform.system() == 'Darwin':  # MacOS
+#     dev_dir = pathlib.Path('/dev')
+#     serial_devices = list(dev_dir.glob('cu.usbmodem*3'))
+#     serial_devices = [str(p) for p in serial_devices]
+#     print(serial_devices)
+# elif platform.system() == 'Linux':  # Linux
+#     dev_dir = pathlib.Path('/dev')
+#     serial_devices = list(dev_dir.glob('ttyACM*[13579]'))
+#     serial_devices = [str(p) for p in serial_devices]
+#     print(serial_devices)
 
 #ports = ['/dev/cu.usbmodem11403', '/dev/cu.usbmodem11103']
 
@@ -136,12 +147,16 @@ def run(server_queue: queue.SimpleQueue) -> None:
             else:
                 payload = None
 
-            print(f"received from {sender} packet kind {packet_kind} length {payload_length} payload {payload}")
+            # print(f"received from {sender} packet kind {packet_kind} length {payload_length} payload {payload}")
 
             source_ids[sender] = indata
 
             if packet_kind == HELLO:
-                print(f"client {sender} says hello")
+                print(f"client {sender} says hello from {str(indata.port)}")
+                with open("desktop/log/serial_ids", "w") as idfile:
+                    for sourceid in sorted(list(source_ids.keys())):
+                        idfile.write(f"{sourceid} {str(source_ids[sourceid].port)}\n")
+
             
             elif packet_kind == STORE or packet_kind == ADD or packet_kind == MULTIPLY:
                 key_length = payload_length - 4
